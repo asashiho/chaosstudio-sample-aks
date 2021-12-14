@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: back
+  name: backend
+spec:
+  ports:
+  - name: back-port
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: back
+  type: LoadBalancer

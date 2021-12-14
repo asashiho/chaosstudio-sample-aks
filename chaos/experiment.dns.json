@@ -1,0 +1,44 @@
+{
+    "location": "eastus",
+    "identity": {
+        "type": "SystemAssigned"
+    },
+    "properties": {
+        "steps": [
+            {
+                "name": "AKS DNS Fault",
+                "branches": [
+                    {
+                        "name": "AKS DNS Fault",
+                        "actions": [
+                            {
+                                "type": "continuous",
+                                "name": "urn:csci:microsoft:azureKubernetesServiceChaosMesh:dnsChaos/2.1",
+                                "parameters": [
+                                    {
+                                        "key": "jsonSpec",
+                                        "value": "{\"action\":\"random\",\"mode\":\"all\",\"patterns\":[\"google.com\",\"chaos-mesh.*\",\"github.?om\"],\"selector\":{\"namespaces\":[\"default\"]}}"
+                                    }
+                                ],
+                                "duration": "PT10M",
+                                "selectorid": "Selector1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "selectors": [
+            {
+                "id": "Selector1",
+                "type": "List",
+                "targets": [
+                    {
+                        "type": "ChaosTarget",
+                        "id": "/subscriptions/xxxxxxxxxxxxxxxxxxxxxxxxxxxx/resourceGroups/aks-chaos/providers/Microsoft.ContainerService/managedClusters/aks-chaos/providers/Microsoft.Chaos/targets/Microsoft-AzureKubernetesServiceChaosMesh"
+                    }
+                ]
+            }
+        ]
+    }
+}

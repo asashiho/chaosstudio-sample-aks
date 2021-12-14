@@ -1,0 +1,44 @@
+{
+    "location": "eastus",
+    "identity": {
+        "type": "SystemAssigned"
+    },
+    "properties": {
+        "steps": [
+            {
+                "name": "AKS Network Fault",
+                "branches": [
+                    {
+                        "name": "AKS Network Fault",
+                        "actions": [
+                            {
+                                "type": "continuous",
+                                "name": "urn:csci:microsoft:azureKubernetesServiceChaosMesh:networkChaos/2.1",
+                                "parameters": [
+                                    {
+                                        "key": "jsonSpec",
+                                        "value": "{\"action\":\"delay\",\"mode\":\"one\",\"selector\":{\"namespaces\":[\"default\"],\"labelSelectors\":{\"app\":\"back\"}},\"delay\":{\"latency\":\"10ms\",\"correlation\":\"100\",\"jitter\":\"0ms\"}}"
+                                    }
+                                ],
+                                "duration": "PT10M",
+                                "selectorid": "Selector1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "selectors": [
+            {
+                "id": "Selector1",
+                "type": "List",
+                "targets": [
+                    {
+                        "type": "ChaosTarget",
+                        "id": "/subscriptions/xxxxxxxxxxxxxxxxxxxxxxxxxxxx/resourceGroups/aks-chaos/providers/Microsoft.ContainerService/managedClusters/aks-chaos/providers/Microsoft.Chaos/targets/Microsoft-AzureKubernetesServiceChaosMesh"
+                    }
+                ]
+            }
+        ]
+    }
+}
