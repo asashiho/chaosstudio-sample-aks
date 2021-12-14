@@ -20,7 +20,7 @@ spec:
         app: front
     spec:
       containers:
-        - image: acrchaos1212.azurecr.io/chaos-frontend:v1
+        - image: acrchaosxxxxx.azurecr.io/chaos-frontend:v1
           imagePullPolicy: Always
           name: front
           resources: {}

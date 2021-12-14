@@ -15,6 +15,6 @@ spec:
         app: back
     spec:
       containers:
-        - image: acrchaos1212.azurecr.io/chaos-backend:v1
+        - image: acrchaosxxxxx.azurecr.io/chaos-backend:v1
           name: back
           resources: {}
